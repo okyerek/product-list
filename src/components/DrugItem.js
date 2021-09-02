@@ -3,17 +3,17 @@ import { FiEdit2 } from 'react-icons/fi'
 import { RiDeleteBin2Line } from 'react-icons/ri'
 import { IoMdClose } from 'react-icons/io'
 import PriceHistory from './PriceHistory'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 const DrugItem = ({ product: { id, name, prices }}) => {
 
     const [viewHistoryId, setViewHistoryId] = useState(null)
     const [isOpened, setIsOpened] = useState(false)
 
     
-
-
-    const latestPrice = prices.sort((a, b) => new Date(b.date) - new Date(a.date))[0]
+    const pricesToSort = [...prices]
+    const latestPrice = pricesToSort.sort((a, b) => new Date(b.date) - new Date(a.date))[0]
     const historicPrices = prices.filter(p => p.id !== latestPrice.id)
+
 
     const onViewHistoryClicked = (e) => {
         e.preventDefault()
@@ -28,10 +28,11 @@ const DrugItem = ({ product: { id, name, prices }}) => {
                 <button
                     onClick={onViewHistoryClicked}
                 >
-                   {
-                       isOpened? <IoMdClose/>: <ImHistory />
-                   } 
+                {
+                    isOpened ? <IoMdClose/>: <ImHistory />
+                } 
                 </button>
+                
                 {/* drug name and price*/}
                 <div className="flex flex-1 justify-between items-center px-2">
                     <p className="flex flex-1 px-1 text-lg font-semibold">{name}</p>
@@ -51,7 +52,7 @@ const DrugItem = ({ product: { id, name, prices }}) => {
             <div className="px-4">
                 {
                     isOpened && 
-                    <PriceHistory  
+                    <PriceHistory 
                         historicPrices={historicPrices} viewHistoryId={viewHistoryId}
                     />
                 }
