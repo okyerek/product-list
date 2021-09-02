@@ -4,10 +4,14 @@ import { RiDeleteBin2Line } from 'react-icons/ri'
 import { IoMdClose } from 'react-icons/io'
 import PriceHistory from './PriceHistory'
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { deleteProduct } from '../redux/productsSlice'
 const DrugItem = ({ product: { id, name, prices }}) => {
 
     const [viewHistoryId, setViewHistoryId] = useState(null)
     const [isOpened, setIsOpened] = useState(false)
+
+    const dispatch = useDispatch()
 
     
     const pricesToSort = [...prices]
@@ -19,6 +23,14 @@ const DrugItem = ({ product: { id, name, prices }}) => {
         e.preventDefault()
         setViewHistoryId(id)
         setIsOpened(!isOpened)
+    }
+
+    const handleDeleteProduct = (e) => {
+        e.preventDefault()
+        dispatch(deleteProduct({
+            id
+        }))
+
     }
 
     return (
@@ -43,7 +55,9 @@ const DrugItem = ({ product: { id, name, prices }}) => {
                     <button>
                         <FiEdit2 /> 
                     </button>
-                    <button>
+                    <button
+                        onClick={handleDeleteProduct}
+                    >
                         <RiDeleteBin2Line /> 
                     </button>
                 </div>
