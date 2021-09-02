@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { getAsyncData } from "../redux/productsSlice"
 import DrugItem from "./DrugItem"
 
-const DrugList = () => {
+const DrugList = ( ) => {
 
     const dispatch = useDispatch()
 

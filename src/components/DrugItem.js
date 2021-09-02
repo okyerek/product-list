@@ -6,9 +6,12 @@ import PriceHistory from './PriceHistory'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { deleteProduct } from '../redux/productsSlice'
+import EditProductForm from './EditProductForm'
 const DrugItem = ({ product: { id, name, prices }}) => {
 
     const [viewHistoryId, setViewHistoryId] = useState(null)
+    const [showEditForm, setShowEditForm] = useState(false)
+
     const [isOpened, setIsOpened] = useState(false)
 
     const dispatch = useDispatch()
@@ -33,44 +36,68 @@ const DrugItem = ({ product: { id, name, prices }}) => {
 
     }
 
+    const handleShowEditFormClicked = (e)=> {
+        e.preventDefault()
+        setShowEditForm(true)
+    }
+
+    const onCloseEditFormClicked =(e) => {
+        e.preventDefault()
+        setShowEditForm(false)
+    }
+
     return (
-        <div className="w-4/5 p-3">
-            <div className="w-full flex items-center">
-                {/* history icon */}
-                <button
-                    onClick={onViewHistoryClicked}
-                >
-                {
-                    isOpened ? <IoMdClose/>: <ImHistory />
-                } 
-                </button>
-                
-                {/* drug name and price*/}
-                <div className="flex flex-1 justify-between items-center px-2">
-                    <p className="flex flex-1 px-1 text-lg font-semibold">{name}</p>
-                    <p>{latestPrice.price}</p>
-                </div>
-                {/* edit and delete icons */}
-                <div className="">
-                    <button>
-                        <FiEdit2 /> 
-                    </button>
+        <div className="w-full flex flex-col items-center">
+            <div className="w-4/5 p-3">
+                <div className="w-full flex items-center">
+                    {/* history icon */}
                     <button
-                        onClick={handleDeleteProduct}
+                        onClick={onViewHistoryClicked}
                     >
-                        <RiDeleteBin2Line /> 
+                    {
+                        isOpened ? <IoMdClose/>: <ImHistory />
+                    } 
                     </button>
+                    
+                    {/* drug name and price*/}
+                    <div className="flex flex-1 justify-between items-center px-2">
+                        <p className="flex flex-1 px-1 text-lg font-semibold">{name}</p>
+                        <p>{latestPrice.price}</p>
+                    </div>
+                    {/* edit and delete icons */}
+                    <div className="">
+                        <button
+                            onClick={handleShowEditFormClicked}
+                        >
+                            <FiEdit2 /> 
+                        </button>
+                        <button
+                            onClick={handleDeleteProduct}
+                        >
+                            <RiDeleteBin2Line /> 
+                        </button>
+                    </div>
+                </div>
+                {/* Historic prices */}
+                <div className="px-4">
+                    {
+                        isOpened && 
+                        <PriceHistory 
+                            historicPrices={historicPrices} viewHistoryId={viewHistoryId}
+                        />
+                    }
                 </div>
             </div>
-            {/* Historic prices */}
-            <div className="px-4">
-                {
-                    isOpened && 
-                    <PriceHistory 
-                        historicPrices={historicPrices} viewHistoryId={viewHistoryId}
-                    />
-                }
-            </div>
+
+            {
+                showEditForm &&
+                <EditProductForm
+                    onCloseEditFormClicked={onCloseEditFormClicked}
+                    id={id}
+                    name={name}
+                    latestPrice={latestPrice.price}
+                />
+            }
         </div>
     )
 }

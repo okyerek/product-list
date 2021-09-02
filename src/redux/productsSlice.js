@@ -29,6 +29,25 @@ const productSlice = createSlice({
         },
         deleteProduct: (state, action) => {
             return state.filter((product) => product.id !== action.payload.id)
+        },
+        editProduct: (state, action) => {
+            const { id, name, price } = action.payload
+            const index = state.findIndex(( p ) => p.id === id)
+            if (name){
+                state[index].name = name
+            }
+            if (price){
+                const { prices } = state[index]
+                const newPrice = {
+                    id: uuidv4(),
+                    date: new Date().toISOString(),
+                    price: price
+                }
+                prices.push(newPrice)
+
+
+            }
+
         }
     },
     extraReducers: {
@@ -40,7 +59,8 @@ const productSlice = createSlice({
 
 export const {
     addNewProduct,
-    deleteProduct
+    deleteProduct,
+    editProduct
 } = productSlice.actions
 
 export default productSlice.reducer

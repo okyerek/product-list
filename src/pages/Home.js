@@ -1,6 +1,7 @@
 import { useState } from "react"
 import AddProductForm from "../components/AddProductForm"
 import DrugList from "../components/DrugList"
+import EditProductForm from "../components/EditProductForm"
 
 const Home = () => {
 
@@ -10,6 +11,8 @@ const Home = () => {
         e.preventDefault()
         setOpenNewForm(false)
     } 
+
+    
 
 
     return (
