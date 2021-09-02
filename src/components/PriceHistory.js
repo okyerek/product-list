@@ -4,7 +4,7 @@ const PriceHistory = ({ historicPrices, viewHistoryId}) => {
     return (
         <>
             <div className="px-5 py-1">
-                <h1 className="text-xs">Historic Prices</h1>
+                <h1 className="text-xs font-light">Historic Prices</h1>
                 <div className="">
                     {
                         historicPrices.map(price => {
