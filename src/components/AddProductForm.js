@@ -24,18 +24,11 @@ const AddProductForm = ( { handleCloseFormButton }) => {
 
         if (nameError || priceError ) {
             alert(`Opps! ${nameError || priceError}`)
-            // setProduct({
-            //     ...product,
-            //     productNameError: nameError,
-            //     productPriceError: priceError
-            // })
 
             return
         }
 
-        // if(!product.name || !product.price){
-        //     return
-        // }
+        
         dispatch(addNewProduct({
             name: product.name,
             price: product.price
@@ -76,8 +69,12 @@ const AddProductForm = ( { handleCloseFormButton }) => {
                                     </div>
                                 </div>
                                 <button
+                                    disabled={!product.name || !product.price}
                                     onClick={handleOnSubmit}
-                                    className="bg-green-200 w-1/4 flex justify-center self-center py-1 font-semibold"
+                                    className={`
+                                    ${(!product.name || !product.price)? "" :"bg-green-200"}
+                                    w-1/4 flex justify-center self-center py-1 font-semibold`
+                                }
                                 >submit</button>
                             </form>
 

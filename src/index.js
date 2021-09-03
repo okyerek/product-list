@@ -6,7 +6,6 @@ import { Provider } from 'react-redux'
 import store from './redux/store';
 
 store.subscribe(()=> {
-  // console.log(store.getState());
   try {
     const {products} = store.getState()
     const serializedState = JSON.stringify(products)

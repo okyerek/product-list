@@ -60,9 +60,9 @@ const DrugItem = ({ product: { id, name, prices }}) => {
                     </button>
                     
                     {/* drug name and price*/}
-                    <div className="flex flex-1 justify-between items-center px-2">
-                        <p className="flex flex-1 px-1 text-lg font-semibold">{name}</p>
-                        <p>{latestPrice.price}</p>
+                    <div className="flex flex-1 justify-between items-center px-2  font-semibold">
+                        <p className="flex flex-1 px-1 text-lg font-bold">{name}</p>
+                        <p>{`GHC ${latestPrice.price}`}</p>
                     </div>
                     {/* edit and delete icons */}
                     <div className="flex items-center gap-4 px-2">

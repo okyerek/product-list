@@ -69,7 +69,10 @@ const EditProductForm = ( { onCloseEditFormClicked, id, name: productName, lates
                                 </div>
                                 <button
                                     onClick={handleOnSubmit}
-                                    className="bg-green-200 w-1/4 flex justify-center self-center py-1 font-semibold"
+                                    className={`
+                                    ${(!product.name || !product.price)? "" :"bg-green-200"}
+                                    w-1/4 flex justify-center self-center py-1 font-semibold`
+                                }
                                 >
                                     Update
                                 </button>
