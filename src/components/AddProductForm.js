@@ -1,20 +1,41 @@
 import { useState } from "react"
 import { IoMdClose } from "react-icons/io"
 import { useDispatch } from "react-redux"
+import { nameValidator, priceValidator } from "../helpers/formValidator"
 import { addNewProduct } from "../redux/productsSlice"
 
 const AddProductForm = ( { handleCloseFormButton }) => {
 
-    const [product, setProduct] = useState({name: "", price: ""})
+    const [product, setProduct] = useState(
+        {
+            name:"", productNameError: "",
+            price: "", productPriceError: ""
+        }
+    )
 
     const dispatch = useDispatch()
 
 
     const handleOnSubmit = (e) => {
         e.preventDefault()
-        if(!product.name || !product.price){
+
+        const nameError = nameValidator(product.name, "Product Name")
+        const priceError = priceValidator(product.price, "Product Price")
+
+        if (nameError || priceError ) {
+            alert(`Opps! ${nameError || priceError}`)
+            // setProduct({
+            //     ...product,
+            //     productNameError: nameError,
+            //     productPriceError: priceError
+            // })
+
             return
         }
+
+        // if(!product.name || !product.price){
+        //     return
+        // }
         dispatch(addNewProduct({
             name: product.name,
             price: product.price

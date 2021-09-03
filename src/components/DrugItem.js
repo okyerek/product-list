@@ -65,7 +65,7 @@ const DrugItem = ({ product: { id, name, prices }}) => {
                         <p>{latestPrice.price}</p>
                     </div>
                     {/* edit and delete icons */}
-                    <div className="">
+                    <div className="flex items-center gap-4 px-2">
                         <button
                             onClick={handleShowEditFormClicked}
                         >

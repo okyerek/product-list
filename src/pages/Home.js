@@ -1,10 +1,8 @@
 import { useState } from "react"
 import AddProductForm from "../components/AddProductForm"
 import DrugList from "../components/DrugList"
-import EditProductForm from "../components/EditProductForm"
 
 const Home = () => {
-
     const [openNewForm, setOpenNewForm] = useState(false)
 
     const handleCloseFormButton = (e) => {
@@ -13,8 +11,6 @@ const Home = () => {
     } 
 
     
-
-
     return (
         <div className='flex flex-col'>
             <div className="flex justify-center">
