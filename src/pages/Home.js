@@ -15,7 +15,7 @@ const Home = () => {
         <div className='flex flex-col'>
             <div className="flex justify-center">
                 <div className="w-4/5 py-2  flex justify-self-center justify-between">
-                    <div className="">Drug List</div>
+                    <div className="">Product List</div>
                     {/* Add new product button */}
                     <button
                         onClick={() => setOpenNewForm(true)}
